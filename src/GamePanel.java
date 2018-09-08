@@ -11,7 +11,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		time = new Timer(1000/60, this);
 	}
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 	public void startGame() {

@@ -3,10 +3,10 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class LeagueInvaders {
-	JFrame frame;
-	final int WINDOW_X = 720;
-	final int WINDOW_Y = 480;
-	GamePanel panel;
+	private JFrame frame;
+	private final int WINDOW_X = 720;
+	private final int WINDOW_Y = 480;
+	private GamePanel panel;
 	public static void main(String[] args) {
 		LeagueInvaders invaders = new LeagueInvaders();
 		invaders.setup();

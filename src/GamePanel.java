@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,10 +12,15 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("hi");
+		
 	}
 	public void startGame() {
 		time.start();
+	}
+	@Override
+
+	public void paintComponent(Graphics g){
+		g.fillRect(10, 10, 100, 100);
 	}
 	
 	

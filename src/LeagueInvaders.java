@@ -16,6 +16,7 @@ public class LeagueInvaders {
 		panel = new GamePanel();
 		
 		frame = new JFrame("League Invaders");
+		frame.addKeyListener(panel);
 		frame.add(panel);
 		frame.setSize(WINDOW_X, WINDOW_Y);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

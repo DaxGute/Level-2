@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 
 	public void paintComponent(Graphics g){
+
 		gameObject.draw(g);
 	}
 	@Override
@@ -43,6 +44,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		System.out.println("release");
 		
+
 	}
 	
 	

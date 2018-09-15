@@ -7,6 +7,8 @@ public class LeagueInvaders {
 	private final int WINDOW_X = 720;
 	private final int WINDOW_Y = 480;
 	private GamePanel panel;
+    final static int WIDTH = 720;
+	final static int HEIGHT = 480;
 	public static void main(String[] args) {
 		LeagueInvaders invaders = new LeagueInvaders();
 		invaders.setup();

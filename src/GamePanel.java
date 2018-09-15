@@ -11,10 +11,10 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	private Timer time;
-	final int MENU_STATE = 0;
-	final int GAME_STATE = 1;
-	final int END_STATE = 2;
-	int current_state = MENU_STATE;
+	private final int MENU_STATE = 0;
+	private final int GAME_STATE = 1;
+	private final int END_STATE = 2;
+	private int current_state = MENU_STATE;
 	private Font titleFont;
 
 	public GamePanel() {

@@ -4,11 +4,11 @@ import javax.swing.JFrame;
 
 public class LeagueInvaders {
 	private JFrame frame;
-	private final int WINDOW_X = 720;
-	private final int WINDOW_Y = 480;
+	private final int WINDOW_X = 480;
+	private final int WINDOW_Y = 720;
 	private GamePanel panel;
-	final static int WIDTH = 720;
-	final static int HEIGHT = 480;
+	final static int WIDTH = 480;
+	final static int HEIGHT = 720;
 
 	public static void main(String[] args) {
 		LeagueInvaders invaders = new LeagueInvaders();

@@ -16,16 +16,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	private final int END_STATE = 2;
 	private int current_state = MENU_STATE;
 	private Font titleFont;
+	private Font textFont;
+	private Rocketship rocket = new Rocketship(230, 600, 50, 50);
 
 	public GamePanel() {
 		time = new Timer(1000 / 60, this);
 		titleFont = new Font("Ariel", Font.PLAIN, 48);
-
+		textFont = new Font("Ariel", Font.PLAIN, 24);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (current_state == MENU_STATE) {
 			updateMenuState();
+
 		} else if (current_state == GAME_STATE) {
 			updateGameState();
 		} else if (current_state == END_STATE) {
@@ -37,8 +40,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void startGame() {
 		time.start();
 	}
-
-	@Override
 
 	public void paintComponent(Graphics g) {
 		if (current_state == MENU_STATE) {
@@ -52,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+
 		System.out.println("type");
 	}
 
@@ -67,7 +68,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			} else if (current_state == GAME_STATE) {
 				current_state = END_STATE;
 			}
-
+		}
+		if (e.getKeyCode() == 39) {
+			rocket.move_Left();
+		}
+		if (e.getKeyCode() == 37) {
+			rocket.move_Right();
 		}
 	}
 
@@ -81,7 +87,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void updateGameState() {
-
+		rocket.update();
 	}
 
 	public void updateEndState() {
@@ -92,17 +98,28 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		G.setColor(Color.BLUE);
 		G.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		G.setFont(titleFont);
-		G.drawString("Text", 40, 40);
+		G.setColor(Color.YELLOW);
+		G.drawString("LEAGUE INVADERS", 30, 200);
+		G.setFont(textFont);
+		G.drawString("Enter 25 cents to start", 100, 400);
+		G.drawString("press space to start", 110, 600);
 	}
 
-	public void drawGameState(Graphics G) {
-		G.setColor(Color.BLACK);
-		G.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+	public void drawGameState(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		rocket.draw(g);
 	}
 
-	public void drawEndState(Graphics G) {
-		G.setColor(Color.RED);
-		G.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+	public void drawEndState(Graphics g) {
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		g.setFont(titleFont);
+		g.setColor(Color.YELLOW);
+		g.drawString("GAME OVER", 120, 200);
+		g.setFont(textFont);
+		g.drawString("Enter 25 cents to start", 100, 400);
+		g.drawString("press space to start", 110, 600);
 	}
 
 }

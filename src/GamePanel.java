@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	private Font titleFont;
 	private Font textFont;
 	private Timer frameDraw;
+	private Timer AlienSpawn;
 	private Rocketship Rocket ;
 	private ObjectManager manager;
 	public static BufferedImage image;
@@ -49,7 +50,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void startGame() {
-		frameDraw.start();
+		AlienSpawn = new Timer(1000, manager);
+		AlienSpawn.start();
 	}
 
 	@Override
@@ -72,13 +74,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 		System.out.println("press" + e.getKeyCode());
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (current_state == END_STATE) {
 				current_state = MENU_STATE;
 			} else{
-				current_state++;	
-			}}
+				current_state++;
+			}
+			if (current_state == GAME_STATE) {
+			startGame();	
+			}}else if (current_state == END_STATE) {
+			AlienSpawn.stop();
+			Rocket = new Rocketship(250, 700, 50, 50);
+			manager = new ObjectManager(Rocket);
+		}
 		else if (e.getKeyCode() == KeyEvent.VK_UP) {
 		    System.out.println("UP");
 		    if (Rocket.y > 0) {
@@ -103,8 +113,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		    if(Rocket.x < 500) {
 		    	Rocket.RIGHT();
 		    }
-		    
+		} else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			manager.addProjectile(Rocket.getProjectile());
 		}
+		
+		
+		
 	}
 	
 
@@ -119,6 +133,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void updateGameState() {
 		manager.update();
+		if (Rocket.isActive == false) {
+			current_state = END_STATE;
+		}
 	}
 
 	public void updateEndState() {
@@ -144,6 +161,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			G.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		}
 		manager.Draw(G);
+		G.setFont(textFont);
+		G.drawString("Score: " + manager.score(), 50, 50);
 	}
 
 	public void drawEndState(Graphics G) {
@@ -153,7 +172,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		G.setColor(Color.YELLOW);
 		G.drawString("GAME OVER", 100, 100);
 		G.setFont(textFont);
-		G.drawString("You killed " + " Enemies", 150, 300);
+		G.drawString("You killed " + manager.score() + " Enemies", 150, 300);
 		G.drawString("Press ENTER to Restart", 125, 500);
 	}
 	

@@ -20,6 +20,7 @@ public class ObjectManager implements ActionListener {
 		Aliens.add(new Alien(random.nextInt(LeagueInvaders.WIDTH),0,50,50));
 	}
 	public void update () {
+		Rocket.update();
 		for (int i = 0; i < Aliens.size(); i++) {
 			Aliens.get(i).update();
 			if (Aliens.get(i).y > LeagueInvaders.HEIGHT) {
@@ -59,10 +60,7 @@ public class ObjectManager implements ActionListener {
 	public void checkCollision () {
 		for (int i = 0; i < Aliens.size(); i++) {
 			for (int u = 0; u < Projectile.size(); u++) {
-			   if (Rocket.collisionBox.intersects(Aliens.get(i).collisionBox)) {
-				   Rocket.isActive = false;
-				   Aliens.get(i).isActive = false;
-			   }else if (Projectile.get(u).collisionBox.intersects(Aliens.get(i).collisionBox)) {
+			   if (Projectile.get(u).collisionBox.intersects(Aliens.get(i).collisionBox)) {
 				   Aliens.get(i).isActive = false;
 				   Projectile.get(u).isActive = false;
 				   score++;
@@ -70,6 +68,13 @@ public class ObjectManager implements ActionListener {
 			   }
 			}
 		}
+		for (int i = 0; i < Aliens.size(); i++) {
+			if (Rocket.collisionBox.intersects(Aliens.get(i).collisionBox)){
+				Rocket.isActive = false;
+				Aliens.get(i).isActive = false;
+			}
+	  }
+	
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
